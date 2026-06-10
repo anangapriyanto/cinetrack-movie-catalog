@@ -1,0 +1,26 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Watchlist {
+  id          String   @id @default(uuid())
+  movieId     Int
+  title       String
+  posterPath  String?
+  status      String   @default("Plan to Watch") // "Plan to Watch", "Watching", "Completed"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Mencegah duplikasi: satu user (kalau nanti ada auth) tidak bisa save film yang sama 2x
+  // Untuk sekarang tanpa auth, pastikan satu device/aplikasi nggak ada duplikat movieId
+  @@unique([movieId])
+}
