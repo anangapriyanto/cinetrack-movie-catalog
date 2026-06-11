@@ -137,7 +137,23 @@ Follow these steps to set up the project locally on your machine.
    npx prisma db push
    ```
 
-5. **Run the Development Server**
+5. **Set up Firebase Firestore Rules**
+   To secure your users' data, go to the **Firebase Console → Firestore Database → Rules** and paste the following rules (or deploy the provided `firestore.rules` file via Firebase CLI):
+   ```javascript
+   rules_version = '2';
+   service cloud.firestore {
+     match /databases/{database}/documents {
+       match /users/{userId} {
+         allow read, write: if request.auth != null && request.auth.uid == userId;
+       }
+       match /{document=**} {
+         allow read, write: if false;
+       }
+     }
+   }
+   ```
+
+6. **Run the Development Server**
    ```bash
    npm run dev
    ```

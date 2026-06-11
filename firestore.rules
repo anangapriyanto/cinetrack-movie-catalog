@@ -1,0 +1,16 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Aturan untuk collection "users"
+    match /users/{userId} {
+      // Hanya user yang login yang bisa membaca dan menulis data miliknya sendiri
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Default: Tolak semua akses ke collection lain yang belum didefinisikan
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
