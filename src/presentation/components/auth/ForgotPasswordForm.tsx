@@ -156,14 +156,14 @@ export default function ForgotPasswordForm() {
     return (
       <div className="animate-fade-in-up text-center" style={{ animationDuration: '0.5s' }}>
         <div className="flex flex-col items-center mb-8">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-600 to-fuchsia-600 flex items-center justify-center text-white shadow-lg shadow-violet-500/30 mb-4">
+          <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-violet-600 to-fuchsia-600 flex items-center justify-center text-white shadow-lg shadow-violet-500/30 mb-4">
             <IconFilm />
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-violet-400 via-fuchsia-400 to-indigo-400 bg-clip-text text-transparent">
+          <h1 className="text-3xl font-extrabold tracking-tight bg-linear-to-r from-violet-400 via-fuchsia-400 to-indigo-400 bg-clip-text text-transparent">
             CINETRACK
           </h1>
         </div>
-        <div className="bg-white/[0.04] border border-white/10 rounded-2xl p-10 shadow-2xl backdrop-blur-md">
+        <div className="bg-white/4 border border-white/10 rounded-2xl p-10 shadow-2xl backdrop-blur-md">
           <div className="w-16 h-16 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center mx-auto mb-4">
             <IconCheck />
           </div>
@@ -173,7 +173,7 @@ export default function ForgotPasswordForm() {
           </p>
           <Link
             href="/login"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white transition-all duration-200 cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm bg-linear-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white transition-all duration-200 cursor-pointer"
           >
             Kembali ke Login <IconArrowRight />
           </Link>
@@ -186,17 +186,17 @@ export default function ForgotPasswordForm() {
     <div className="animate-fade-in-up" style={{ animationDuration: '0.5s' }}>
       {/* Brand */}
       <div className="flex flex-col items-center mb-8">
-        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-600 to-fuchsia-600 flex items-center justify-center text-white shadow-lg shadow-violet-500/30 mb-4">
+        <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-violet-600 to-fuchsia-600 flex items-center justify-center text-white shadow-lg shadow-violet-500/30 mb-4">
           <IconFilm />
         </div>
-        <h1 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-violet-400 via-fuchsia-400 to-indigo-400 bg-clip-text text-transparent">
+        <h1 className="text-3xl font-extrabold tracking-tight bg-linear-to-r from-violet-400 via-fuchsia-400 to-indigo-400 bg-clip-text text-transparent">
           CINETRACK
         </h1>
         <p className="text-slate-500 text-xs uppercase tracking-widest font-semibold mt-1">Pro Edition</p>
       </div>
 
       {/* Card */}
-      <div className="bg-white/[0.04] border border-white/10 rounded-2xl p-8 shadow-2xl backdrop-blur-md">
+      <div className="bg-white/4 border border-white/10 rounded-2xl p-8 shadow-2xl backdrop-blur-md">
         <div className="mb-6">
           <h2 className="text-xl font-bold text-white">Reset Password</h2>
           <p className="text-slate-400 text-sm mt-1">Masukkan email Anda untuk menerima link reset password.</p>
@@ -220,7 +220,7 @@ export default function ForgotPasswordForm() {
             disabled={loading}
             className="
               w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-semibold text-sm
-              bg-gradient-to-r from-violet-600 to-fuchsia-600
+              bg-linear-to-r from-violet-600 to-fuchsia-600
               hover:from-violet-500 hover:to-fuchsia-500
               text-white shadow-lg shadow-violet-500/25
               transition-all duration-200 cursor-pointer
