@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { addToWatchlist } from '@/app/(main)/actions/watchlist.actions';
+import { useState, useEffect } from 'react';
+import { addToWatchlist, checkWatchlistStatus } from '@/app/(main)/actions/watchlist.actions';
 import { useLanguage } from '@/presentation/contexts/LanguageContext';
 
 interface WatchlistButtonProps {
@@ -15,8 +15,19 @@ export default function WatchlistButton({ movieId, title, posterPath }: Watchlis
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
+  const [isAdded, setIsAdded] = useState(false);
+
+  useEffect(() => {
+    const checkStatus = async () => {
+      const added = await checkWatchlistStatus(movieId);
+      setIsAdded(added);
+    };
+    checkStatus();
+  }, [movieId]);
 
   const handleAdd = async () => {
+    if (isAdded) return;
+    
     setLoading(true);
     setStatus('idle');
     try {
@@ -25,6 +36,7 @@ export default function WatchlistButton({ movieId, title, posterPath }: Watchlis
       setMessage(res.success ? t('add_success') : t('movie_exists'));
       
       if (res.success) {
+        setIsAdded(true);
         setTimeout(() => setStatus('idle'), 3000); // hilangkan notifikasi sukses setelah 3 detik
       }
     } catch {
@@ -39,10 +51,14 @@ export default function WatchlistButton({ movieId, title, posterPath }: Watchlis
     <div className="relative inline-block">
       <button 
         onClick={handleAdd}
-        disabled={loading}
-        className="px-8 py-3 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-white font-bold rounded-xl transition-all hover:-translate-y-1 disabled:opacity-50 disabled:hover:translate-y-0 cursor-pointer"
+        disabled={loading || isAdded}
+        className={`px-8 py-3 font-bold rounded-xl transition-all cursor-pointer ${
+          isAdded 
+            ? 'bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20 cursor-default hover:translate-y-0' 
+            : 'bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-white hover:-translate-y-1 disabled:opacity-50 disabled:hover:translate-y-0'
+        }`}
       >
-        {loading ? t('adding') : t('add_to_watchlist')}
+        {loading ? t('adding') : (isAdded ? t('already_in_watchlist') : t('add_to_watchlist'))}
       </button>
 
       {/* Notification Toast Mini */}

@@ -72,7 +72,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           photoURL,
         };
 
-        setAuthCookie('authenticated');
+        setAuthCookie(firebaseUser.uid);
         setUser(userData);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(userData));
       } else {

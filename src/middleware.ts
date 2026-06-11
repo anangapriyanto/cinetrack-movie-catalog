@@ -17,7 +17,7 @@ function isGuestOnly(pathname: string) {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const token = request.cookies.get('auth-token')?.value;
-  const isAuthenticated = !!token && token === 'authenticated';
+  const isAuthenticated = !!token;
 
   // Unauthenticated → protect private routes → redirect to login
   if (!isAuthenticated && isProtected(pathname)) {

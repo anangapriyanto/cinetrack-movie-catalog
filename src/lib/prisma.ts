@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import { PrismaNeon } from '@prisma/adapter-neon'
 
 // Lazy initialization — PrismaClient is only created when first accessed,
 // not at import/module evaluation time. This prevents build failures
@@ -9,13 +10,16 @@ declare const globalThis: {
 } & typeof global;
 
 function getPrismaClient(): PrismaClient {
-  if (!process.env.DATABASE_URL) {
+  const url = process.env.DATABASE_URL
+  if (!url) {
     throw new Error(
       'DATABASE_URL is not set. Please set it in your environment variables.'
     )
   }
 
-  const client = globalThis.prismaGlobal ?? new PrismaClient()
+  // Prisma v7: use Neon serverless adapter with connection string config
+  const adapter = new PrismaNeon({ connectionString: url })
+  const client = globalThis.prismaGlobal ?? new PrismaClient({ adapter })
 
   if (process.env.NODE_ENV !== 'production') {
     globalThis.prismaGlobal = client

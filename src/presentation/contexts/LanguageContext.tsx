@@ -64,6 +64,7 @@ const translations: Translations = {
     completed: '✅ Completed',
     remove: 'Remove',
     remove_confirm: 'Are you sure you want to remove this movie?',
+    already_in_watchlist: '✓ In Watchlist',
   },
   id: {
     menu_utama: 'Menu Utama',
@@ -118,6 +119,7 @@ const translations: Translations = {
     completed: '✅ Selesai Menonton',
     remove: 'Hapus',
     remove_confirm: 'Apakah Anda yakin ingin menghapus film ini?',
+    already_in_watchlist: '✓ Tersimpan',
   }
 };
 
